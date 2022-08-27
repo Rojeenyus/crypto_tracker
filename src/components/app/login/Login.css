@@ -1,0 +1,111 @@
+.login-body {
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%),
+    0 3px 1px -2px rgb(0 0 0 / 20%);
+  background-color: #fff;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #757575;
+  max-width: 425px;
+  margin: 80px auto 80px auto;
+}
+.login-details-container {
+  width: 100%;
+}
+.login-details-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 10px;
+}
+.login-form-title {
+  color: #757575;
+  font-weight: 300;
+  margin-top: 11px;
+  font-size: 18px;
+  margin-bottom: 23px;
+  width: 75%;
+  text-align: center;
+}
+.login-form,
+.logout,
+.post-signup__form,
+.signup-form {
+  width: 100%;
+  max-width: 280px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: auto;
+}
+.j-field {
+  margin: 0 0 24px 0;
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.j-field label,
+.j-field legend {
+  -webkit-font-smoothing: antialiased;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #475661;
+  display: block;
+  margin: 3px 0;
+  padding: 0;
+  width: 100%;
+}
+.j-field__input-wrapper {
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+}
+.j-button--primary {
+  background: #0060ab;
+}
+.j-button {
+  -webkit-font-smoothing: antialiased;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  padding: 16px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+}
+.j-field input,
+.j-field select,
+.j-field textarea {
+  -webkit-font-smoothing: antialiased;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #10161a;
+  height: 38px;
+  border-radius: 4px;
+  border: 1px solid #b9c2c9;
+  background-color: #f5f8fa;
+  padding: 0 16px;
+  margin: 4px 0;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color, background-color 100ms ease-in-out;
+}
+.login-form__footer {
+  margin-top: 23px;
+  margin-bottom: 14px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.link {
+  cursor: pointer;
+  color: purple;
+}

@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Login from "./components/app/login/Login";
+import Navbar from "./components/app/navbar/Navbar";
+import React, { useState } from "react";
+import Signup from "./components/app/login/Signup";
 
 function App() {
+  let [body, setBody] = useState("login");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      {body === "login" ? (
+        <Login
+          setBody={setBody}
+          setEmail={setEmail}
+          setPassword={setPassword}
+          email={email}
+          password={password}
+        />
+      ) : body === "signup" ? (
+        <Signup
+          setBody={setBody}
+          setEmail={setEmail}
+          setPassword={setPassword}
+          email={email}
+          password={password}
+        />
+      ) : (
+        "ho"
+      )}
     </div>
   );
 }

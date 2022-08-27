@@ -1,0 +1,17 @@
+.nav-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+  background: #0b5999;
+  color: #fff;
+  min-height: 50px;
+}
+.account-dropdown {
+  margin-right: 40px;
+}
+.name-dropdown:hover,
+.logo:hover {
+  color: rgb(197, 196, 196);
+  cursor: pointer;
+}
