@@ -1,7 +1,46 @@
 import React, { useState } from "react";
 import "./Login.css";
+import axios from "axios";
+import Cookies from "universal-cookie";
 
-function Login({ setBody, setPassword, setEmail, email, password }) {
+function Login({
+  setBody,
+  setPassword,
+  setEmail,
+  email,
+  password,
+  setHeaders,
+}) {
+  const url = "https://crypto-tracker-ada97.herokuapp.com/auth/sign_in";
+  let data = {};
+  const cookies = new Cookies();
+
+  function login(email, password) {
+    data = {
+      email: email,
+      password: password,
+    };
+  }
+
+  let handleSubmit = async () => {
+    login(email, password);
+    console.log("loading please wait");
+    try {
+      const response = await axios.post(url, data);
+      let datas = {
+        "access-token": response.headers["access-token"],
+        uid: response.headers.uid,
+        client: response.headers.client,
+        expiry: response.headers.expiry,
+      };
+      cookies.set("auth", datas);
+      setHeaders(true);
+      console.log(response.headers);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
   return (
     <div className="login-body">
       <div>
@@ -10,7 +49,13 @@ function Login({ setBody, setPassword, setEmail, email, password }) {
       <div className="login-details-container">
         <div className="login-details-flex">
           <div className="login-form-title">Welcome Back!</div>
-          <form className="login-form">
+          <form
+            className="login-form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+          >
             <div className="j-field j-field--error">
               <label>Email or Mobile Number</label>
               <div className="j-field__input-wrapper">

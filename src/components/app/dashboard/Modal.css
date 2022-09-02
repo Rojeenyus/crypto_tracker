@@ -1,0 +1,71 @@
+.modal {
+  overflow: auto;
+  z-index: 1050;
+  outline: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  bottom: 0;
+}
+
+.c-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.c-panel {
+  overflow: hidden;
+  background: #fff;
+}
+.c-panel--default {
+  margin: 0 auto 20px;
+  width: 600px;
+}
+
+.c-modal__inner {
+  margin: 0 1rem;
+  position: relative;
+  text-align: left;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 30%);
+  border: 0;
+  border-radius: 6px;
+}
+.ui-panel--modal__close {
+  width: 16px;
+  height: 16px;
+  fill: #626f7a;
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  cursor: pointer;
+}
+.c-panel__titles,
+.c-panel__titles--relative {
+  padding: 26px;
+}
+.c-panel__title:last-child {
+  margin-bottom: 0;
+}
+.c-panel__title {
+  text-align: center;
+  font-size: 26px;
+  color: #333;
+  margin-bottom: 2px;
+}
+.c-panel__body {
+  padding: 0 40px 40px;
+}
+.liquid-container .j-field {
+  display: block;
+}
+
+.c-panel__footer {
+  display: flex;
+  justify-content: center;
+}
+
+.c-panel__btn {
+  width: 10rem;
+}

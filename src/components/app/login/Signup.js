@@ -1,8 +1,48 @@
 import React, { useState } from "react";
 import "./Login.css";
+import axios from "axios";
+import Cookies from "universal-cookie";
 
-function Signup({ setBody, setPassword, setEmail, email, password }) {
+function Signup({
+  setBody,
+  setPassword,
+  setEmail,
+  email,
+  password,
+  setHeaders,
+}) {
   const [repassword, setRepassword] = useState("");
+  const url = "https://crypto-tracker-ada97.herokuapp.com/auth";
+  let data = {};
+  const cookies = new Cookies();
+
+  function register(email, password, repassword) {
+    data = {
+      email: email,
+      password: password,
+      password_confirmation: repassword,
+    };
+  }
+
+  let handleSubmit = async () => {
+    register(email, password, repassword);
+    console.log("loading please wait");
+    try {
+      const response = await axios.post(url, data);
+      let datas = {
+        "access-token": response.headers["access-token"],
+        uid: response.headers.uid,
+        client: response.headers.client,
+        expiry: response.headers.expiry,
+      };
+      cookies.set("auth", datas);
+      setHeaders(true);
+      console.log(response.headers);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
   return (
     <div className="login-body">
       <div>
@@ -12,7 +52,13 @@ function Signup({ setBody, setPassword, setEmail, email, password }) {
         <div className="login-form-title" style={{ width: "100%" }}>
           Your Crypto-Wallet Upgrade
         </div>
-        <form className="login-form">
+        <form
+          className="login-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+        >
           <div className="j-field">
             <label>Email address</label>
             <div className="j-field__input-wrapper">

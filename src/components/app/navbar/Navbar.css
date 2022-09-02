@@ -15,3 +15,47 @@
   color: rgb(197, 196, 196);
   cursor: pointer;
 }
+
+.logout {
+  cursor: pointer;
+  display: block;
+  font-size: 12px;
+  padding: 5px 20px;
+  color: #262626;
+}
+.logout:hover {
+  color: #fff;
+  background-color: #0b5999;
+}
+
+.caret {
+  margin-left: 5px;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px dashed;
+  border-top: 4px solid\9;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+.dropdown-menu {
+  position: absolute;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  right: 40px;
+  padding-top: 10px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px 0 rgb(0 0 0 / 18%);
+}

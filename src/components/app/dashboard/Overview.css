@@ -1,0 +1,143 @@
+.css-14w9sv9 {
+  padding: 24px 32px 64px 24px;
+}
+
+.css-74d07z {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.css-1x0mdq {
+  margin: 0px 0px 24px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.css-1lzhfdj {
+  margin: 0px 8px 0px 0px;
+  color: rgb(30, 35, 41);
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 40px;
+}
+.css-ho61tr {
+  margin: 24px 0px 0px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0px;
+}
+
+.btn-secondary {
+  background-color: rgb(190, 195, 203);
+}
+@media screen and (min-width: 767px) {
+  .css-1dmxtyx {
+    min-width: 80px;
+    flex: 1 1 auto;
+    height: 24px;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .css-ess6bf {
+    align-items: center;
+    flex-direction: row;
+  }
+}
+
+.css-8jsrjd {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: rgb(30, 35, 41);
+}
+
+@media screen and (min-width: 767px) {
+  .css-1is1v4y {
+    flex-wrap: wrap;
+    min-width: 400px;
+  }
+}
+.css-1is1v4y {
+  box-sizing: border-box;
+  margin: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 300px;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex: 1 0 40%;
+  border-bottom: 1px solid rgb(194, 197, 201);
+}
+.css-r1mb0r {
+  box-sizing: border-box;
+  margin: 16px 8px 16px 0px;
+  min-width: 155px;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+}
+.css-gkju6w {
+  box-sizing: border-box;
+  margin: 0px 0px 8px;
+  min-width: 0px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.css-mhsf5v {
+  box-sizing: border-box;
+  margin: 0px 8px 0px 0px;
+  min-width: 0px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: rgb(30, 35, 41);
+}
+.css-fcqrul {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  display: flex;
+  flex-flow: column nowrap;
+}
+.css-1iivh6i {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  font-weight: 600;
+}
+.css-xsje34 {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  color: rgb(30, 35, 41);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.css-16lg46c {
+  box-sizing: border-box;
+  margin: 16px 32px 16px 0px;
+  min-width: 0px;
+  display: flex;
+  cursor: pointer;
+  flex-direction: column;
+}
+
+.css-1cukg4k {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  color: rgb(112, 122, 138);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+}
