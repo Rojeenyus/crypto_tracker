@@ -19,7 +19,7 @@ function Wallets({ setModal, setBody, setWalletNumber }) {
       }
     };
     wallet();
-  }, []);
+  }, [modal]);
   return (
     <div className="css-14w9sv9">
       <div className="css-74d07z">

@@ -13,6 +13,7 @@ function Dashboard({ setBody, setWalletNumber }) {
         setModal={setModal}
         setBody={setBody}
         setWalletNumber={setWalletNumber}
+        modal={modal}
       />
       {modal ? <Modal setModal={setModal} /> : ""}
     </div>

@@ -23,6 +23,7 @@ function Modal({ setModal }) {
     try {
       const response = await axios.post(url, data, headers);
       console.log(response);
+      setModal(false);
     } catch (error) {
       console.log(error.response);
     }
