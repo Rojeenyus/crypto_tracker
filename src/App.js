@@ -5,12 +5,14 @@ import React, { useState, useEffect } from "react";
 import Signup from "./components/app/login/Signup";
 import Cookies from "js-cookie";
 import Dashboard from "./components/app/dashboard/Dashboard";
+import Wallet from "./components/app/wallet/Wallet";
 
 function App() {
   let [body, setBody] = useState("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let [headers, setHeaders] = useState(false);
+  let [walletNumber, setWalletNumber] = useState();
 
   useEffect(() => {
     if (Cookies.get("auth") !== undefined) {
@@ -40,9 +42,9 @@ function App() {
           setHeaders={setHeaders}
         />
       ) : body === "dashboard" ? (
-        <Dashboard />
+        <Dashboard setBody={setBody} setWalletNumber={setWalletNumber} />
       ) : body === "wallet" ? (
-        ""
+        <Wallet setBody={setBody} walletNumber={walletNumber} />
       ) : (
         ""
       )}
