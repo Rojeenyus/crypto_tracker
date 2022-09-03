@@ -3,7 +3,7 @@ import "./Wallets.css";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-function Wallets({ setModal, setBody, setWalletNumber }) {
+function Wallets({ setModal, setBody, setWalletNumber, modal }) {
   let [data, setData] = useState();
   const url = "https://crypto-tracker-ada97.herokuapp.com/wallets";
 
