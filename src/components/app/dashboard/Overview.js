@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Overview.css";
 
-function Overview() {
+function Overview({ data }) {
+  let [val, setVal] = useState();
+
+  useEffect(() => {
+    if (data !== undefined) {
+      let a = { overall: 0, pnl: 0 };
+      data.map((x) => {
+        return (a = {
+          overall: parseFloat(x.overall_worth) + parseFloat(a.overall),
+          pnl: parseFloat(x.overall_pnl) + parseFloat(a.pnl),
+        });
+      });
+      setVal(a);
+    }
+  }, [data]);
+
   return (
     <div className="css-14w9sv9">
       <div className="css-74d07z">
@@ -20,7 +35,12 @@ function Overview() {
           </div>
         </div>
         <div data-bn-type="text" className="css-8jsrjd">
-          ≈ $114,923.04
+          ≈ $
+          {val
+            ? val.overall.toLocaleString(undefined, {
+                maximumFractionDigits: 2,
+              })
+            : ""}
         </div>
       </div>
       <div className="css-1is1v4y">
@@ -33,7 +53,12 @@ function Overview() {
           <div className="css-fcqrul">
             <div className="css-1iivh6i">
               <div data-bn-type="text" className="css-xsje34">
-                ≈ $114,923.04
+                ≈ $
+                {val
+                  ? val.overall.toLocaleString(undefined, {
+                      maximumFractionDigits: 2,
+                    })
+                  : ""}
               </div>
             </div>
             <div data-bn-type="text" className="css-1cukg4k">
@@ -69,11 +94,16 @@ function Overview() {
           <div className="css-fcqrul">
             <div className="css-1iivh6i">
               <div data-bn-type="text" className="css-xsje34">
-                +$85.1
+                $
+                {val
+                  ? val.pnl.toLocaleString(undefined, {
+                      maximumFractionDigits: 2,
+                    })
+                  : ""}
               </div>
             </div>
             <div data-bn-type="text" className="css-1cukg4k">
-              +7.2%
+              +0.0%
             </div>
           </div>
         </div>

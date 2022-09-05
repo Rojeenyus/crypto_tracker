@@ -3,8 +3,7 @@ import "./Wallets.css";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-function Wallets({ setModal, setBody, setWalletNumber, modal }) {
-  let [data, setData] = useState();
+function Wallets({ setModal, setBody, setWalletNumber, modal, data, setData }) {
   const url = "https://crypto-tracker-ada97.herokuapp.com/wallets";
 
   useEffect(() => {
@@ -55,6 +54,8 @@ function Wallets({ setModal, setBody, setWalletNumber, modal }) {
                   <div className="card-body text-primary">
                     <h5 className="card-title">Estimated Balance</h5>≈ $
                     {x.overall_worth}
+                    <h5 className="card-title">Estimated PnL</h5>≈ $
+                    {x.overall_pnl}
                   </div>
                 </div>
               );

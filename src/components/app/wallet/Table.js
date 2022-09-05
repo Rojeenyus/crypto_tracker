@@ -4,16 +4,18 @@ import axios from "axios";
 
 function Table({ setModal, walletNumber, modal, setOverall, setPnl }) {
   let [items, setItems] = useState([]);
+  let [trigger, setTrigger] = useState(true);
   let arrayList = {};
 
   let url = `https://crypto-tracker-ada97.herokuapp.com/wallets/${walletNumber}/cryptocurrencies`;
 
-  let final = (buy_price, symbol, price, quantity) => {
+  let final = (buy_price, symbol, price, quantity, id) => {
     arrayList = {
       buy_price: buy_price,
       symbol: symbol,
       price: price,
       quantity: quantity,
+      id: id,
     };
   };
 
@@ -70,6 +72,16 @@ function Table({ setModal, walletNumber, modal, setOverall, setPnl }) {
             });
         });
 
+        let id = money.map((x) => {
+          return x
+            .map((y) => {
+              return y.id;
+            })
+            .reduce((a, b) => {
+              return a;
+            });
+        });
+
         let price = money.map((x) => {
           return x
             .map((y) => {
@@ -82,7 +94,7 @@ function Table({ setModal, walletNumber, modal, setOverall, setPnl }) {
 
         for (let x = 0; x < total.length; x++) {
           let a = total[x] / qty[x];
-          final(a, symbol[x], price[x], qty[x]);
+          final(a, symbol[x], price[x], qty[x], id[x]);
           addItem(arrayList);
         }
       } catch (error) {
@@ -90,7 +102,7 @@ function Table({ setModal, walletNumber, modal, setOverall, setPnl }) {
       }
     };
     fetch();
-  }, [modal]);
+  }, [trigger, modal]);
 
   useEffect(() => {
     if (items !== undefined) {
@@ -107,6 +119,15 @@ function Table({ setModal, walletNumber, modal, setOverall, setPnl }) {
       setPnl(b);
     }
   }, [items]);
+
+  let handleRemove = async (id) => {
+    try {
+      await axios.delete(`${url}/${id}`);
+      setTrigger(!trigger);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
 
   return (
     <div className="css-14w9sv9">
@@ -176,7 +197,16 @@ function Table({ setModal, walletNumber, modal, setOverall, setPnl }) {
                         x.quantity * x.buy_price
                       ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                     </td>
-                    <td>remove</td>
+                    <td>
+                      <button
+                        className="btn btn-remove"
+                        onClick={() => {
+                          handleRemove(x.id);
+                        }}
+                      >
+                        remove
+                      </button>
+                    </td>
                   </tr>
                 );
               })
