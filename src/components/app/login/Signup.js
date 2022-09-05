@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import ReactLoading from "react-loading";
 
 function Signup({
   setBody,
@@ -10,6 +11,8 @@ function Signup({
   email,
   password,
   setHeaders,
+  loading,
+  setLoading,
 }) {
   const [repassword, setRepassword] = useState("");
   const url = "https://crypto-tracker-ada97.herokuapp.com/auth";
@@ -26,7 +29,7 @@ function Signup({
 
   let handleSubmit = async () => {
     register(email, password, repassword);
-    console.log("loading please wait");
+    setLoading(true);
     try {
       const response = await axios.post(url, data);
       let datas = {
@@ -37,9 +40,10 @@ function Signup({
       };
       cookies.set("auth", datas);
       setHeaders(true);
-      console.log(response.headers);
+      setLoading(false);
     } catch (error) {
       console.log(error.response);
+      setLoading(false);
     }
   };
 
@@ -102,13 +106,15 @@ function Signup({
               please fill the required fields properly
             </div>
           </div>
-          <button
-            id="submit-button"
-            type="submit"
-            className="j-button j-button--primary"
-          >
-            Create account
-          </button>
+          {loading ? (
+            <button disabled={true} className="j-button j-button--primary">
+              <ReactLoading type="spin" height={"16px"} width={"16px"} />
+            </button>
+          ) : (
+            <button type="submit" className="j-button j-button--primary">
+              Create Account
+            </button>
+          )}
         </form>
         <div className="login-form__footer">
           <span>

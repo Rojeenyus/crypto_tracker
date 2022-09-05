@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "./Modal.css";
 import axios from "axios";
 import Cookies from "js-cookie";
+import ReactLoading from "react-loading";
 
-function Modal({ setModal }) {
+function Modal({ setModal, loading, setLoading }) {
   let data = {};
   const url = "https://crypto-tracker-ada97.herokuapp.com/wallets";
   let [input, setInput] = useState("");
@@ -14,18 +15,17 @@ function Modal({ setModal }) {
       },
     };
   }
-
   let handleSubmit = async () => {
+    setLoading(true);
     wallet(input);
     let headers = { headers: JSON.parse(Cookies.get("auth")) };
-    console.log(headers);
-    console.log("loading please wait");
     try {
-      const response = await axios.post(url, data, headers);
-      console.log(response);
+      await axios.post(url, data, headers);
       setModal(false);
+      setLoading(false);
     } catch (error) {
       console.log(error.response);
+      setLoading(false);
     }
   };
 
@@ -61,14 +61,24 @@ function Modal({ setModal }) {
             </div>
           </div>
           <div className="c-panel__footer">
-            <button
-              className="btn btn-primary c-panel__btn"
-              onClick={() => {
-                handleSubmit();
-              }}
-            >
-              Create
-            </button>
+            {loading ? (
+              <button
+                className="btn btn-primary c-panel__btn"
+                disabled={true}
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                <ReactLoading type="spin" height={"20px"} width={"20px"} />
+              </button>
+            ) : (
+              <button
+                className="btn btn-primary c-panel__btn"
+                onClick={() => {
+                  handleSubmit();
+                }}
+              >
+                Create
+              </button>
+            )}
           </div>
         </div>
       </div>

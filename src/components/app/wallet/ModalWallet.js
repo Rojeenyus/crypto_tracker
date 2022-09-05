@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import "./ModalWallet.css";
+import ReactLoading from "react-loading";
 
-function ModalWallet({ setModal, walletNumber }) {
+function ModalWallet({ setModal, walletNumber, loading, setLoading }) {
   let [coin, setCoin] = useState("");
   let [price, setPrice] = useState(0);
   let [quantity, setQuantity] = useState(0);
@@ -31,16 +32,16 @@ function ModalWallet({ setModal, walletNumber }) {
   }, [coin]);
 
   let handleSubmit = async () => {
+    setLoading(true);
     input(coin, price, quantity);
     let headers = { headers: JSON.parse(Cookies.get("auth")) };
-    console.log("loading please wait");
     try {
       const response = await axios.post(url, data, headers);
-      console.log(response);
       setModal(false);
+      setLoading(false);
     } catch (error) {
       console.log(error.response);
-      setModal(false);
+      setLoading(false);
     }
   };
 
@@ -128,14 +129,24 @@ function ModalWallet({ setModal, walletNumber }) {
             </div>
           </div>
           <div className="c-panel__footer">
-            <button
-              className="btn btn-primary c-panel__btn"
-              onClick={() => {
-                handleSubmit();
-              }}
-            >
-              Create
-            </button>
+            {loading ? (
+              <button
+                className="btn btn-primary c-panel__btn"
+                disabled={true}
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                <ReactLoading type="spin" height={"20px"} width={"20px"} />
+              </button>
+            ) : (
+              <button
+                className="btn btn-primary c-panel__btn"
+                onClick={() => {
+                  handleSubmit();
+                }}
+              >
+                Create
+              </button>
+            )}
           </div>
         </div>
       </div>

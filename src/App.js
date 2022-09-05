@@ -13,6 +13,7 @@ function App() {
   const [password, setPassword] = useState("");
   let [headers, setHeaders] = useState(false);
   let [walletNumber, setWalletNumber] = useState();
+  let [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (Cookies.get("auth") !== undefined) {
@@ -31,6 +32,8 @@ function App() {
           email={email}
           password={password}
           setHeaders={setHeaders}
+          loading={loading}
+          setLoading={setLoading}
         />
       ) : body === "signup" ? (
         <Signup
@@ -40,11 +43,23 @@ function App() {
           email={email}
           password={password}
           setHeaders={setHeaders}
+          loading={loading}
+          setLoading={setLoading}
         />
       ) : body === "dashboard" ? (
-        <Dashboard setBody={setBody} setWalletNumber={setWalletNumber} />
+        <Dashboard
+          setBody={setBody}
+          setWalletNumber={setWalletNumber}
+          loading={loading}
+          setLoading={setLoading}
+        />
       ) : body === "wallet" ? (
-        <Wallet setBody={setBody} walletNumber={walletNumber} />
+        <Wallet
+          setBody={setBody}
+          walletNumber={walletNumber}
+          loading={loading}
+          setLoading={setLoading}
+        />
       ) : (
         ""
       )}

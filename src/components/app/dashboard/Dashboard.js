@@ -4,7 +4,7 @@ import Wallets from "./Wallets";
 import "./Dashboard.css";
 import Modal from "./Modal";
 
-function Dashboard({ setBody, setWalletNumber }) {
+function Dashboard({ setBody, setWalletNumber, loading, setLoading }) {
   let [modal, setModal] = useState(false);
   let [data, setData] = useState();
   return (
@@ -18,7 +18,11 @@ function Dashboard({ setBody, setWalletNumber }) {
         data={data}
         setData={setData}
       />
-      {modal ? <Modal setModal={setModal} /> : ""}
+      {modal ? (
+        <Modal setModal={setModal} setLoading={setLoading} loading={loading} />
+      ) : (
+        ""
+      )}
     </div>
   );
 }

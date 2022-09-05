@@ -3,7 +3,7 @@ import Overview from "./Overview";
 import ModalWallet from "./ModalWallet";
 import Table from "./Table";
 
-function Wallet({ setBody, walletNumber }) {
+function Wallet({ setBody, walletNumber, loading, setLoading }) {
   let [modal, setModal] = useState(false);
   let [overall, setOverall] = useState();
   let [pnl, setPnl] = useState();
@@ -18,7 +18,12 @@ function Wallet({ setBody, walletNumber }) {
         setPnl={setPnl}
       />
       {modal ? (
-        <ModalWallet setModal={setModal} walletNumber={walletNumber} />
+        <ModalWallet
+          setModal={setModal}
+          walletNumber={walletNumber}
+          loading={loading}
+          setLoading={setLoading}
+        />
       ) : (
         ""
       )}
