@@ -16,6 +16,8 @@ function Wallet({ setBody, walletNumber, loading, setLoading }) {
         modal={modal}
         setOverall={setOverall}
         setPnl={setPnl}
+        loading={loading}
+        setLoading={setLoading}
       />
       {modal ? (
         <ModalWallet

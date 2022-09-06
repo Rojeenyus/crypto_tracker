@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./Table.css";
 import axios from "axios";
+import ReactLoading from "react-loading";
 
-function Table({ setModal, walletNumber, modal, setOverall, setPnl }) {
+function Table({
+  setModal,
+  walletNumber,
+  modal,
+  setOverall,
+  setPnl,
+  loading,
+  setLoading,
+}) {
   let [items, setItems] = useState([]);
   let [trigger, setTrigger] = useState(true);
   let arrayList = {};
@@ -121,11 +130,14 @@ function Table({ setModal, walletNumber, modal, setOverall, setPnl }) {
   }, [items]);
 
   let handleRemove = async (id) => {
+    setLoading(true);
     try {
       await axios.delete(`${url}/${id}`);
       setTrigger(!trigger);
+      setLoading(false);
     } catch (error) {
       console.log(error.response);
+      setLoading(false);
     }
   };
 
@@ -154,8 +166,12 @@ function Table({ setModal, walletNumber, modal, setOverall, setPnl }) {
           <tr>
             <th scope="col">Coin</th>
             <th scope="col">Average buy price</th>
-            <th scope="col">Current Price</th>
-            <th scope="col">Current Holdings</th>
+            <th scope="col" className="hide">
+              Current Price
+            </th>
+            <th scope="col" className="hide">
+              Current Holdings
+            </th>
             <th scope="col">Total Value</th>
             <th scope="col">PNL</th>
             <th scope="col">Action</th>
@@ -173,13 +189,13 @@ function Table({ setModal, walletNumber, modal, setOverall, setPnl }) {
                         maximumFractionDigits: 2,
                       })}
                     </td>
-                    <td>
+                    <td className="hide">
                       $
                       {x.price.toLocaleString(undefined, {
                         maximumFractionDigits: 2,
                       })}
                     </td>
-                    <td>
+                    <td className="hide">
                       {x.quantity.toLocaleString(undefined, {
                         maximumFractionDigits: 2,
                       })}
@@ -198,14 +214,24 @@ function Table({ setModal, walletNumber, modal, setOverall, setPnl }) {
                       ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                     </td>
                     <td>
-                      <button
-                        className="btn btn-remove"
-                        onClick={() => {
-                          handleRemove(x.id);
-                        }}
-                      >
-                        remove
-                      </button>
+                      {loading ? (
+                        <button className="btn btn-remove" disabled={true}>
+                          <ReactLoading
+                            type="spin"
+                            height={"16px"}
+                            width={"16px"}
+                          />
+                        </button>
+                      ) : (
+                        <button
+                          className="btn btn-remove"
+                          onClick={() => {
+                            handleRemove(x.id);
+                          }}
+                        >
+                          remove
+                        </button>
+                      )}
                     </td>
                   </tr>
                 );

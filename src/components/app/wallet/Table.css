@@ -36,3 +36,9 @@ tr {
   background-color: #9b0101;
   border-color: #9b0101;
 }
+
+@media screen and (max-width: 600px) {
+  .hide {
+    display: none;
+  }
+}

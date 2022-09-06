@@ -6,9 +6,11 @@ import ReactLoading from "react-loading";
 
 function ModalWallet({ setModal, walletNumber, loading, setLoading }) {
   let [coin, setCoin] = useState("");
-  let [price, setPrice] = useState(0);
-  let [quantity, setQuantity] = useState(0);
+  let [price, setPrice] = useState();
+  let [quantity, setQuantity] = useState();
   let [datas, setDatas] = useState();
+  const [error, setError] = useState();
+  const [error2, setError2] = useState(false);
   let data = {};
   const cgurl = `https://api.coingecko.com/api/v3/search?query=${coin.toLowerCase()}`;
   let url = `https://crypto-tracker-ada97.herokuapp.com/wallets/${walletNumber}/cryptocurrencies`;
@@ -29,18 +31,21 @@ function ModalWallet({ setModal, walletNumber, loading, setLoading }) {
       }
     };
     if (coin) fetch();
-  }, [coin]);
+  }, [cgurl, coin]);
 
   let handleSubmit = async () => {
     setLoading(true);
     input(coin, price, quantity);
     let headers = { headers: JSON.parse(Cookies.get("auth")) };
     try {
-      const response = await axios.post(url, data, headers);
+      let response = await axios.post(url, data, headers);
+      console.log(response);
       setModal(false);
       setLoading(false);
+      setError2(false);
     } catch (error) {
-      console.log(error.response);
+      setError(Object.values(error.response.data)[0]);
+      setError2(true);
       setLoading(false);
     }
   };
@@ -124,6 +129,7 @@ function ModalWallet({ setModal, walletNumber, loading, setLoading }) {
                     onChange={(e) => setQuantity(e.target.value)}
                     required
                   />
+                  {error2 ? <div style={{ color: "red" }}>{error[0]}</div> : ""}
                 </div>
               </div>
             </div>

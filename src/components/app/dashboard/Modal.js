@@ -8,6 +8,8 @@ function Modal({ setModal, loading, setLoading }) {
   let data = {};
   const url = "https://crypto-tracker-ada97.herokuapp.com/wallets";
   let [input, setInput] = useState("");
+  const [error, setError] = useState();
+  const [error2, setError2] = useState(false);
   function wallet(input) {
     data = {
       wallet: {
@@ -23,8 +25,10 @@ function Modal({ setModal, loading, setLoading }) {
       await axios.post(url, data, headers);
       setModal(false);
       setLoading(false);
+      setError2(false);
     } catch (error) {
-      console.log(error.response);
+      setError(error.response.data.wallet_type);
+      setError2(true);
       setLoading(false);
     }
   };
@@ -57,6 +61,7 @@ function Modal({ setModal, loading, setLoading }) {
                     required
                   />
                 </div>
+                {error2 ? <div style={{ color: "red" }}>{error}</div> : ""}
               </div>
             </div>
           </div>

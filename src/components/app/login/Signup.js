@@ -15,6 +15,8 @@ function Signup({
   setLoading,
 }) {
   const [repassword, setRepassword] = useState("");
+  const [error, setError] = useState();
+  const [error2, setError2] = useState(false);
   const url = "https://crypto-tracker-ada97.herokuapp.com/auth";
   let data = {};
   const cookies = new Cookies();
@@ -41,8 +43,10 @@ function Signup({
       cookies.set("auth", datas);
       setHeaders(true);
       setLoading(false);
+      setError2(false);
     } catch (error) {
-      console.log(error.response);
+      setError(error.response.data.errors.full_messages[0]);
+      setError2(true);
       setLoading(false);
     }
   };
@@ -74,12 +78,6 @@ function Signup({
               />
             </div>
           </div>
-          <div id="account-match" style={{ color: "red", display: "none" }}>
-            email already taken
-          </div>
-          <div id="mobile-match" style={{ color: "red", display: "none" }}>
-            mobile number already taken
-          </div>
           <div className="j-field">
             <label>Password</label>
             <div className="j-field__input-wrapper">
@@ -90,9 +88,6 @@ function Signup({
                 required
               />
             </div>
-            <div id="pw-match" style={{ color: "red", display: "none" }}>
-              password doesnt match
-            </div>
             <label>Retype Password</label>
             <div className="j-field__input-wrapper">
               <input
@@ -102,9 +97,7 @@ function Signup({
                 required
               />
             </div>
-            <div id="req-match" style={{ color: "red", display: "none" }}>
-              please fill the required fields properly
-            </div>
+            {error2 ? <div style={{ color: "red" }}>{error}</div> : ""}
           </div>
           {loading ? (
             <button disabled={true} className="j-button j-button--primary">

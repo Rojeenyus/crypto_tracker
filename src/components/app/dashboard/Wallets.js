@@ -4,13 +4,14 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 function Wallets({ setModal, setBody, setWalletNumber, modal, data, setData }) {
+  let [remove, setRemove] = useState();
+  let [trigger, setTrigger] = useState();
   const url = "https://crypto-tracker-ada97.herokuapp.com/wallets";
 
   useEffect(() => {
     let wallet = async () => {
       try {
         let headers = { headers: JSON.parse(Cookies.get("auth")) };
-        console.log("loading please wait");
         const response = await axios.get(url, headers);
         setData(response.data);
       } catch (error) {
@@ -18,7 +19,24 @@ function Wallets({ setModal, setBody, setWalletNumber, modal, data, setData }) {
       }
     };
     wallet();
-  }, [modal]);
+  }, [modal, trigger]);
+
+  useEffect(() => {
+    if (remove) {
+      let handleDelete = async () => {
+        try {
+          let headers = { headers: JSON.parse(Cookies.get("auth")) };
+          const response = await axios.delete(`${url}/${remove}`, headers);
+          setTrigger(!trigger);
+        } catch (error) {
+          console.log(error.response);
+        }
+      };
+      handleDelete();
+      setRemove();
+    }
+  }, [remove]);
+
   return (
     <div className="css-14w9sv9">
       <div className="css-74d07z">
@@ -42,20 +60,32 @@ function Wallets({ setModal, setBody, setWalletNumber, modal, data, setData }) {
         {data
           ? data.map((x) => {
               return (
-                <div
-                  key={x.id}
-                  className="card border-primary mb-3"
-                  onClick={() => {
-                    setBody("wallet");
-                    setWalletNumber(x.id);
-                  }}
-                >
+                <div key={x.id} className="card border-primary">
                   <div className="card-header">{x.wallet_type}</div>
                   <div className="card-body text-primary">
                     <h5 className="card-title">Estimated Balance</h5>≈ $
                     {x.overall_worth}
                     <h5 className="card-title">Estimated PnL</h5>≈ $
                     {x.overall_pnl}
+                  </div>
+                  <div
+                    className="btn"
+                    style={{ color: "#01579b", textDecoration: "underline" }}
+                    onClick={() => {
+                      setBody("wallet");
+                      setWalletNumber(x.id);
+                    }}
+                  >
+                    go to wallet
+                  </div>
+                  <div
+                    className="btn"
+                    style={{ color: "red", textDecoration: "underline" }}
+                    onClick={() => {
+                      setRemove(x.id);
+                    }}
+                  >
+                    remove
                   </div>
                 </div>
               );

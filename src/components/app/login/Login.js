@@ -14,6 +14,8 @@ function Login({
   loading,
   setLoading,
 }) {
+  const [error, setError] = useState();
+  const [error2, setError2] = useState(false);
   const url = "https://crypto-tracker-ada97.herokuapp.com/auth/sign_in";
   let data = {};
   const cookies = new Cookies();
@@ -39,9 +41,11 @@ function Login({
       cookies.set("auth", datas);
       setHeaders(true);
       setLoading(false);
+      setError2(false);
     } catch (error) {
       setLoading(false);
-      console.log(error.response);
+      setError(error.response.data.errors[0]);
+      setError2(true);
     }
   };
 
@@ -82,12 +86,7 @@ function Login({
                 />
               </div>
             </div>
-            <div id="account-match" style={{ color: "red", display: "none" }}>
-              account/password does not match
-            </div>
-            <div id="no-input" style={{ color: "red", display: "none" }}>
-              please fill the inputs
-            </div>
+            {error2 ? <div style={{ color: "red" }}>{error}</div> : ""}
             {loading ? (
               <button disabled={true} className="j-button j-button--primary">
                 <ReactLoading type="spin" height={"16px"} width={"16px"} />
