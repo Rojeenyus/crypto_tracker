@@ -64,9 +64,13 @@ function Wallets({ setModal, setBody, setWalletNumber, modal, data, setData }) {
                   <div className="card-header">{x.wallet_type}</div>
                   <div className="card-body text-primary">
                     <h5 className="card-title">Estimated Balance</h5>≈ $
-                    {x.overall_worth}
+                    {parseFloat(x.overall_worth).toLocaleString(undefined, {
+                      maximumFractionDigits: 2,
+                    })}
                     <h5 className="card-title">Estimated PnL</h5>≈ $
-                    {x.overall_pnl}
+                    {parseFloat(x.overall_pnl).toLocaleString(undefined, {
+                      maximumFractionDigits: 2,
+                    })}
                   </div>
                   <div
                     className="btn"

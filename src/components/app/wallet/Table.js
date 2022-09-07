@@ -11,8 +11,12 @@ function Table({
   setPnl,
   loading,
   setLoading,
+  setModalTrade,
+  setCoinTrade,
+  modalTrade,
+  items,
+  setItems,
 }) {
-  let [items, setItems] = useState([]);
   let [trigger, setTrigger] = useState(true);
   let arrayList = {};
 
@@ -111,7 +115,7 @@ function Table({
       }
     };
     fetch();
-  }, [trigger, modal]);
+  }, [trigger, modal, modalTrade]);
 
   useEffect(() => {
     if (items !== undefined) {
@@ -213,7 +217,7 @@ function Table({
                         x.quantity * x.buy_price
                       ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                     </td>
-                    <td>
+                    <td className="edit">
                       {loading ? (
                         <button className="btn btn-remove" disabled={true}>
                           <ReactLoading
@@ -232,6 +236,15 @@ function Table({
                           remove
                         </button>
                       )}
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => {
+                          setModalTrade(true);
+                          setCoinTrade(x.symbol.toUpperCase());
+                        }}
+                      >
+                        trade
+                      </button>
                     </td>
                   </tr>
                 );

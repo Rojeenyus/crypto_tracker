@@ -37,8 +37,16 @@ tr {
   border-color: #9b0101;
 }
 
+.edit {
+  display: flex;
+  justify-content: space-around;
+}
+
 @media screen and (max-width: 600px) {
   .hide {
     display: none;
+  }
+  .edit {
+    flex-direction: column;
   }
 }

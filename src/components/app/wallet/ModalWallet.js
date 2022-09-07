@@ -11,6 +11,7 @@ function ModalWallet({ setModal, walletNumber, loading, setLoading }) {
   let [datas, setDatas] = useState();
   const [error, setError] = useState();
   const [error2, setError2] = useState(false);
+  let [nofetch, setNoFetch] = useState(false);
   let data = {};
   const cgurl = `https://api.coingecko.com/api/v3/search?query=${coin.toLowerCase()}`;
   let url = `https://crypto-tracker-ada97.herokuapp.com/wallets/${walletNumber}/cryptocurrencies`;
@@ -30,7 +31,9 @@ function ModalWallet({ setModal, walletNumber, loading, setLoading }) {
         console.log(error.response);
       }
     };
-    if (coin) fetch();
+    if (coin && nofetch === false) {
+      fetch();
+    }
   }, [cgurl, coin]);
 
   let handleSubmit = async () => {
@@ -71,10 +74,13 @@ function ModalWallet({ setModal, walletNumber, loading, setLoading }) {
               <div className="contacts-search">
                 <div className="contacts-search__input-container">
                   <input
-                    placeholder="BTC"
+                    placeholder="ex: BTC"
                     type="text"
                     className="contacts-search__input ember-text-field input-send"
-                    onChange={(e) => setCoin(e.target.value)}
+                    onChange={(e) => {
+                      setCoin(e.target.value);
+                      setNoFetch(false);
+                    }}
                     value={coin}
                     required
                   />
@@ -91,6 +97,7 @@ function ModalWallet({ setModal, walletNumber, loading, setLoading }) {
                             onClick={() => {
                               setCoin(x.symbol);
                               setDatas("");
+                              setNoFetch(true);
                             }}
                           >
                             {x.symbol}

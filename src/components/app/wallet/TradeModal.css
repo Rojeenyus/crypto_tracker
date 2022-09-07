@@ -1,0 +1,9 @@
+.flex {
+  display: flex;
+}
+
+.middle {
+  align-self: center;
+  padding: 2rem;
+  font-size: 2rem;
+}
