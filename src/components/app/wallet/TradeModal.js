@@ -11,6 +11,8 @@ function TradeModal({
   coinTrade,
   walletNumber,
   items,
+  trigger,
+  setTrigger,
 }) {
   let [coin, setCoin] = useState("");
   let [sellPrice, setSellPrice] = useState();
@@ -20,8 +22,12 @@ function TradeModal({
   let [datas, setDatas] = useState();
   let [nofetch, setNoFetch] = useState(false);
   let [errorQty, setErrorQty] = useState();
+  let [dataPrice, setDataPrice] = useState();
   const cgurl = `https://api.coingecko.com/api/v3/search?query=${coin.toLowerCase()}`;
   let url = `https://crypto-tracker-ada97.herokuapp.com/wallets/${walletNumber}/cryptocurrencies`;
+  let priceurl = `https://api.coingecko.com/api/v3/simple/price?ids=${
+    dataPrice ? dataPrice[0].id : ""
+  }&vs_currencies=usd`;
   let data = {};
   let headers = { headers: JSON.parse(Cookies.get("auth")) };
 
@@ -51,6 +57,7 @@ function TradeModal({
       try {
         const response = await axios.get(cgurl);
         setDatas(response.data.coins.slice(0, 5));
+        setDataPrice(response.data.coins.slice(0, 1));
       } catch (error) {
         console.log(error.response);
       }
@@ -64,11 +71,11 @@ function TradeModal({
     setLoading(true);
     input(coinTrade, sellPrice, sellQuantity * -1);
     try {
-      let response = await axios.post(url, data, headers);
-      console.log(response);
+      await axios.post(url, data, headers);
+      setTrigger(!trigger);
       handleSubmit2();
     } catch (error) {
-      // setError(Object.values(error.response.data)[0]);
+      // setError(Object.values(error.response.data)[0])
       // setError2(true);
       setLoading(false);
       console.log(error.response);
@@ -88,6 +95,20 @@ function TradeModal({
       // setError2(true);
       setLoading(false);
       console.log(error.response);
+    }
+  };
+  let handleSetPrice = async () => {
+    let fetch = async () => {
+      try {
+        const response = await axios.get(priceurl);
+        console.log(response);
+        setBuyPrice(Object.values(response.data)[0].usd);
+      } catch (error) {
+        console.log(error.response);
+      }
+    };
+    if (coin) {
+      fetch();
     }
   };
 
@@ -131,8 +152,21 @@ function TradeModal({
                       step="0.00001"
                       className="contacts-search__input ember-text-field input-send"
                       onChange={(e) => setSellPrice(e.target.value)}
+                      value={sellPrice}
                       required
                     />
+                    <div
+                      className="set-price"
+                      onClick={() => {
+                        setSellPrice(
+                          items.find((x) => {
+                            return x.symbol === coinTrade.toLowerCase();
+                          }).price
+                        );
+                      }}
+                    >
+                      set current price
+                    </div>
                   </div>
                 </div>
               </div>
@@ -206,8 +240,17 @@ function TradeModal({
                       step="0.00001"
                       className="contacts-search__input ember-text-field input-send"
                       onChange={(e) => setBuyPrice(e.target.value)}
+                      value={buyPrice}
                       required
                     />
+                    <div
+                      className="set-price"
+                      onClick={() => {
+                        handleSetPrice();
+                      }}
+                    >
+                      set current price
+                    </div>
                   </div>
                 </div>
               </div>

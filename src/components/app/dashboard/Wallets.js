@@ -18,7 +18,9 @@ function Wallets({ setModal, setBody, setWalletNumber, modal, data, setData }) {
         console.log(error.response);
       }
     };
-    wallet();
+    if (modal === false) {
+      wallet();
+    }
   }, [modal, trigger]);
 
   useEffect(() => {

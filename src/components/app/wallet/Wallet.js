@@ -11,6 +11,7 @@ function Wallet({ setBody, walletNumber, loading, setLoading }) {
   let [pnl, setPnl] = useState();
   let [coinTrade, setCoinTrade] = useState();
   let [items, setItems] = useState([]);
+  let [trigger, setTrigger] = useState(true);
   return (
     <>
       <Overview pnl={pnl} overall={overall} setBody={setBody} />
@@ -27,6 +28,8 @@ function Wallet({ setBody, walletNumber, loading, setLoading }) {
         modalTrade={modalTrade}
         items={items}
         setItems={setItems}
+        trigger={trigger}
+        setTrigger={setTrigger}
       />
       {modal ? (
         <ModalWallet
@@ -34,6 +37,8 @@ function Wallet({ setBody, walletNumber, loading, setLoading }) {
           walletNumber={walletNumber}
           loading={loading}
           setLoading={setLoading}
+          trigger={trigger}
+          setTrigger={setTrigger}
         />
       ) : (
         ""
@@ -46,6 +51,8 @@ function Wallet({ setBody, walletNumber, loading, setLoading }) {
           coinTrade={coinTrade}
           walletNumber={walletNumber}
           items={items}
+          trigger={trigger}
+          setTrigger={setTrigger}
         />
       ) : (
         ""

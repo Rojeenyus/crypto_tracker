@@ -4,7 +4,14 @@ import Cookies from "js-cookie";
 import "./ModalWallet.css";
 import ReactLoading from "react-loading";
 
-function ModalWallet({ setModal, walletNumber, loading, setLoading }) {
+function ModalWallet({
+  setModal,
+  walletNumber,
+  loading,
+  setLoading,
+  trigger,
+  setTrigger,
+}) {
   let [coin, setCoin] = useState("");
   let [price, setPrice] = useState();
   let [quantity, setQuantity] = useState();
@@ -12,9 +19,13 @@ function ModalWallet({ setModal, walletNumber, loading, setLoading }) {
   const [error, setError] = useState();
   const [error2, setError2] = useState(false);
   let [nofetch, setNoFetch] = useState(false);
+  let [dataPrice, setDataPrice] = useState();
   let data = {};
   const cgurl = `https://api.coingecko.com/api/v3/search?query=${coin.toLowerCase()}`;
   let url = `https://crypto-tracker-ada97.herokuapp.com/wallets/${walletNumber}/cryptocurrencies`;
+  let priceurl = `https://api.coingecko.com/api/v3/simple/price?ids=${
+    dataPrice ? dataPrice[0].id : ""
+  }&vs_currencies=usd`;
 
   function input(coin, price, quantity) {
     data = {
@@ -27,6 +38,7 @@ function ModalWallet({ setModal, walletNumber, loading, setLoading }) {
       try {
         const response = await axios.get(cgurl);
         setDatas(response.data.coins.slice(0, 5));
+        setDataPrice(response.data.coins.slice(0, 1));
       } catch (error) {
         console.log(error.response);
       }
@@ -41,8 +53,8 @@ function ModalWallet({ setModal, walletNumber, loading, setLoading }) {
     input(coin, price, quantity);
     let headers = { headers: JSON.parse(Cookies.get("auth")) };
     try {
-      let response = await axios.post(url, data, headers);
-      console.log(response);
+      await axios.post(url, data, headers);
+      setTrigger(!trigger);
       setModal(false);
       setLoading(false);
       setError2(false);
@@ -50,6 +62,21 @@ function ModalWallet({ setModal, walletNumber, loading, setLoading }) {
       setError(Object.values(error.response.data)[0]);
       setError2(true);
       setLoading(false);
+    }
+  };
+
+  let handleSetPrice = async () => {
+    let fetch = async () => {
+      try {
+        const response = await axios.get(priceurl);
+        console.log(response);
+        setPrice(Object.values(response.data)[0].usd);
+      } catch (error) {
+        console.log(error.response);
+      }
+    };
+    if (coin) {
+      fetch();
     }
   };
 
@@ -119,8 +146,17 @@ function ModalWallet({ setModal, walletNumber, loading, setLoading }) {
                     step="0.00001"
                     className="contacts-search__input ember-text-field input-send"
                     onChange={(e) => setPrice(e.target.value)}
+                    value={price}
                     required
                   />
+                  <div
+                    className="set-price"
+                    onClick={() => {
+                      handleSetPrice();
+                    }}
+                  >
+                    set current price
+                  </div>
                 </div>
               </div>
             </div>

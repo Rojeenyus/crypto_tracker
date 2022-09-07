@@ -16,12 +16,11 @@ function Table({
   modalTrade,
   items,
   setItems,
+  trigger,
+  setTrigger,
 }) {
-  let [trigger, setTrigger] = useState(true);
   let arrayList = {};
-
   let url = `https://crypto-tracker-ada97.herokuapp.com/wallets/${walletNumber}/cryptocurrencies`;
-
   let final = (buy_price, symbol, price, quantity, id) => {
     arrayList = {
       buy_price: buy_price,
@@ -114,8 +113,11 @@ function Table({
         console.log(error.response);
       }
     };
-    fetch();
-  }, [trigger, modal, modalTrade]);
+
+    if (modal === false && modalTrade === false) {
+      fetch();
+    }
+  }, [trigger]);
 
   useEffect(() => {
     if (items !== undefined) {
