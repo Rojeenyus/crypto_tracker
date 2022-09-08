@@ -18,6 +18,7 @@ function Table({
   setItems,
   trigger,
   setTrigger,
+  setLoadPage,
 }) {
   let arrayList = {};
   let url = `https://crypto-tracker-ada97.herokuapp.com/wallets/${walletNumber}/cryptocurrencies`;
@@ -39,6 +40,7 @@ function Table({
 
   useEffect(() => {
     let fetch = async () => {
+      setLoadPage(true);
       try {
         const response = await axios.get(url);
         setItems([]);
@@ -109,7 +111,9 @@ function Table({
           final(a, symbol[x], price[x], qty[x], id[x]);
           addItem(arrayList);
         }
+        setLoadPage(false);
       } catch (error) {
+        setLoadPage(false);
         console.log(error.response);
       }
     };

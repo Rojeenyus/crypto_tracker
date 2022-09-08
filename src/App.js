@@ -6,6 +6,7 @@ import Signup from "./components/app/login/Signup";
 import Cookies from "js-cookie";
 import Dashboard from "./components/app/dashboard/Dashboard";
 import Wallet from "./components/app/wallet/Wallet";
+import Loading from "./components/app/loading/Loading";
 
 function App() {
   let [body, setBody] = useState("login");
@@ -14,6 +15,7 @@ function App() {
   let [headers, setHeaders] = useState(false);
   let [walletNumber, setWalletNumber] = useState();
   let [loading, setLoading] = useState(false);
+  let [loadPage, setLoadPage] = useState(false);
 
   useEffect(() => {
     if (Cookies.get("auth") !== undefined) {
@@ -24,6 +26,7 @@ function App() {
   return (
     <div className="App">
       <Navbar setHeaders={setHeaders} headers={headers} />
+      {loadPage ? <Loading /> : ""}
       {body === "login" ? (
         <Login
           setBody={setBody}
@@ -52,6 +55,7 @@ function App() {
           setWalletNumber={setWalletNumber}
           loading={loading}
           setLoading={setLoading}
+          setLoadPage={setLoadPage}
         />
       ) : body === "wallet" ? (
         <Wallet
@@ -59,6 +63,7 @@ function App() {
           walletNumber={walletNumber}
           loading={loading}
           setLoading={setLoading}
+          setLoadPage={setLoadPage}
         />
       ) : (
         ""

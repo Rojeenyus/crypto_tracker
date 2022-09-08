@@ -5,7 +5,13 @@ import "./Dashboard.css";
 import Modal from "./Modal";
 import Transactions from "./Transactions";
 
-function Dashboard({ setBody, setWalletNumber, loading, setLoading }) {
+function Dashboard({
+  setBody,
+  setWalletNumber,
+  loading,
+  setLoading,
+  setLoadPage,
+}) {
   let [modal, setModal] = useState(false);
   let [data, setData] = useState();
   let [transaction, setTransaction] = useState(false);
@@ -26,6 +32,7 @@ function Dashboard({ setBody, setWalletNumber, loading, setLoading }) {
           modal={modal}
           data={data}
           setData={setData}
+          setLoadPage={setLoadPage}
         />
       )}
 

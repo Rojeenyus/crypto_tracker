@@ -4,7 +4,7 @@ import ModalWallet from "./ModalWallet";
 import Table from "./Table";
 import TradeModal from "./TradeModal";
 
-function Wallet({ setBody, walletNumber, loading, setLoading }) {
+function Wallet({ setBody, walletNumber, loading, setLoading, setLoadPage }) {
   let [modal, setModal] = useState(false);
   let [modalTrade, setModalTrade] = useState(false);
   let [overall, setOverall] = useState();
@@ -30,6 +30,7 @@ function Wallet({ setBody, walletNumber, loading, setLoading }) {
         setItems={setItems}
         trigger={trigger}
         setTrigger={setTrigger}
+        setLoadPage={setLoadPage}
       />
       {modal ? (
         <ModalWallet

@@ -3,25 +3,36 @@ import "./Wallets.css";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-function Wallets({ setModal, setBody, setWalletNumber, modal, data, setData }) {
+function Wallets({
+  setModal,
+  setBody,
+  setWalletNumber,
+  modal,
+  data,
+  setData,
+  setLoadPage,
+}) {
   let [remove, setRemove] = useState();
   let [trigger, setTrigger] = useState();
   const url = "https://crypto-tracker-ada97.herokuapp.com/wallets";
 
   useEffect(() => {
     let wallet = async () => {
+      setLoadPage(true);
       try {
         let headers = { headers: JSON.parse(Cookies.get("auth")) };
         const response = await axios.get(url, headers);
         setData(response.data);
+        setLoadPage(false);
       } catch (error) {
         console.log(error.response);
+        setLoadPage(false);
       }
     };
     if (modal === false) {
       wallet();
     }
-  }, [modal, trigger]);
+  }, [trigger]);
 
   useEffect(() => {
     if (remove) {
