@@ -14,9 +14,9 @@ Version 1.0.0 <br>
 
 ## Project Screen Shots
 
-![Dashboard](/img/dashboard.png "Dashboard")<br>
-![Transactions](/img/transactions.png "Transactions")<br>
-![Wallet](/img/wallet.png "Wallet")
+![Dashboard](/src/img/dashboard.png "Dashboard")<br>
+![Transactions](/src/img/transactions.png "Transactions")<br>
+![Wallet](/src/img/wallet.png "Wallet")
 
 ## Installation and Setup Instructions
 
