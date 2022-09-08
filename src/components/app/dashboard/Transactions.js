@@ -68,11 +68,20 @@ function Transactions() {
                 <div className="c-activity-list__amount is-outgoing">
                   {x.quantity > 0 ? (
                     <span className="positive">
-                      + {`${x.quantity} ${x.symbol.toUpperCase()}`}
+                      +{" "}
+                      {`${parseFloat(x.quantity).toLocaleString(undefined, {
+                        maximumFractionDigits: 2,
+                      })} ${x.symbol.toUpperCase()}`}
                     </span>
                   ) : (
                     <span className="negative">
-                      - {`${x.quantity * -1} ${x.symbol.toUpperCase()}`}
+                      -{" "}
+                      {`${(parseFloat(x.quantity) * -1).toLocaleString(
+                        undefined,
+                        {
+                          maximumFractionDigits: 2,
+                        }
+                      )} ${x.symbol.toUpperCase()}`}
                     </span>
                   )}
                 </div>
