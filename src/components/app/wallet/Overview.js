@@ -78,15 +78,30 @@ function Overview({ pnl, overall, setBody }) {
           </div>
           <div className="css-fcqrul">
             <div className="css-1iivh6i">
-              <div data-bn-type="text" className="css-xsje34">
+              <div
+                data-bn-type="text"
+                className={`css-xsje34 ${
+                  pnl > 0 && pnl ? "positive" : "negative"
+                }`}
+              >
                 $
                 {overall
                   ? pnl.toLocaleString(undefined, { maximumFractionDigits: 2 })
                   : ""}
               </div>
             </div>
-            <div data-bn-type="text" className="css-1cukg4k">
-              +0.0%
+            <div
+              data-bn-type="text"
+              className={`css-1cukg4k ${
+                pnl > 0 && pnl ? "positive" : "negative"
+              }`}
+            >
+              {overall
+                ? ((pnl / overall) * 100).toLocaleString(undefined, {
+                    maximumFractionDigits: 2,
+                  })
+                : ""}
+              %
             </div>
           </div>
         </div>

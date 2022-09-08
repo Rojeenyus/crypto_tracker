@@ -72,11 +72,8 @@ function TradeModal({
     input(coinTrade, sellPrice, sellQuantity * -1);
     try {
       await axios.post(url, data, headers);
-      setTrigger(!trigger);
       handleSubmit2();
     } catch (error) {
-      // setError(Object.values(error.response.data)[0])
-      // setError2(true);
       setLoading(false);
       console.log(error.response);
     }
@@ -85,14 +82,11 @@ function TradeModal({
   let handleSubmit2 = async () => {
     input(coin, buyPrice, buyQuantity);
     try {
-      let response = await axios.post(url, data, headers);
-      console.log(response);
+      await axios.post(url, data, headers);
       setModalTrade(false);
       setLoading(false);
-      // setError2(false);
+      setTrigger(!trigger);
     } catch (error) {
-      // setError(Object.values(error.response.data)[0]);
-      // setError2(true);
       setLoading(false);
       console.log(error.response);
     }
@@ -101,7 +95,6 @@ function TradeModal({
     let fetch = async () => {
       try {
         const response = await axios.get(priceurl);
-        console.log(response);
         setBuyPrice(Object.values(response.data)[0].usd);
       } catch (error) {
         console.log(error.response);

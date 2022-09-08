@@ -96,7 +96,12 @@ function Overview({ data, setTransaction, transaction }) {
           </div>
           <div className="css-fcqrul">
             <div className="css-1iivh6i">
-              <div data-bn-type="text" className="css-xsje34">
+              <div
+                data-bn-type="text"
+                className={`css-xsje34 ${
+                  val ? (val.pnl > 0 ? "positive" : "negative") : ""
+                }`}
+              >
                 $
                 {val
                   ? val.pnl.toLocaleString(undefined, {
@@ -105,8 +110,18 @@ function Overview({ data, setTransaction, transaction }) {
                   : ""}
               </div>
             </div>
-            <div data-bn-type="text" className="css-1cukg4k">
-              +0.0%
+            <div
+              data-bn-type="text"
+              className={`css-1cukg4k ${
+                val ? (val.pnl > 0 ? "positive" : "negative") : ""
+              }`}
+            >
+              {val
+                ? ((val.pnl / val.overall) * 100).toLocaleString(undefined, {
+                    maximumFractionDigits: 2,
+                  })
+                : ""}
+              %
             </div>
           </div>
         </div>
