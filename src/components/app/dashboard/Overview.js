@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Overview.css";
 
-function Overview({ data }) {
+function Overview({ data, setTransaction, transaction }) {
   let [val, setVal] = useState();
 
   useEffect(() => {
@@ -29,8 +29,11 @@ function Overview({ data }) {
               data-bn-type="button"
               id="dashboard_top_buy-crypto"
               className="btn btn-secondary"
+              onClick={() => {
+                setTransaction(!transaction);
+              }}
             >
-              Transactions
+              {transaction ? "Dashboard" : "Transactions"}
             </button>
           </div>
         </div>
