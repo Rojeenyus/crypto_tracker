@@ -35,6 +35,8 @@ function Dashboard({
           data={data}
           setData={setData}
           setLoadPage={setLoadPage}
+          trigger={trigger}
+          setTrigger={setTrigger}
         />
       )}
 

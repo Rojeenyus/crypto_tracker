@@ -11,9 +11,10 @@ function Wallets({
   data,
   setData,
   setLoadPage,
+  trigger,
+  setTrigger,
 }) {
   let [remove, setRemove] = useState();
-  let [trigger, setTrigger] = useState();
   const url = "https://crypto-tracker-ada97.herokuapp.com/wallets";
 
   useEffect(() => {
