@@ -16,6 +16,7 @@ function App() {
   let [walletNumber, setWalletNumber] = useState();
   let [loading, setLoading] = useState(false);
   let [loadPage, setLoadPage] = useState(false);
+  let [trigger, setTrigger] = useState(true);
 
   useEffect(() => {
     if (Cookies.get("auth") !== undefined) {
@@ -56,6 +57,8 @@ function App() {
           loading={loading}
           setLoading={setLoading}
           setLoadPage={setLoadPage}
+          trigger={trigger}
+          setTrigger={setTrigger}
         />
       ) : body === "wallet" ? (
         <Wallet
@@ -64,6 +67,8 @@ function App() {
           loading={loading}
           setLoading={setLoading}
           setLoadPage={setLoadPage}
+          trigger={trigger}
+          setTrigger={setTrigger}
         />
       ) : (
         ""

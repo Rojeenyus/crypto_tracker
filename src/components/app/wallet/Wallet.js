@@ -4,14 +4,21 @@ import ModalWallet from "./ModalWallet";
 import Table from "./Table";
 import TradeModal from "./TradeModal";
 
-function Wallet({ setBody, walletNumber, loading, setLoading, setLoadPage }) {
+function Wallet({
+  setBody,
+  walletNumber,
+  loading,
+  setLoading,
+  setLoadPage,
+  trigger,
+  setTrigger,
+}) {
   let [modal, setModal] = useState(false);
   let [modalTrade, setModalTrade] = useState(false);
   let [overall, setOverall] = useState();
   let [pnl, setPnl] = useState();
   let [coinTrade, setCoinTrade] = useState();
   let [items, setItems] = useState([]);
-  let [trigger, setTrigger] = useState(true);
   return (
     <>
       <Overview pnl={pnl} overall={overall} setBody={setBody} />

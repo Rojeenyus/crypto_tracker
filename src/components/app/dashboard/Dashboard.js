@@ -11,6 +11,8 @@ function Dashboard({
   loading,
   setLoading,
   setLoadPage,
+  trigger,
+  setTrigger,
 }) {
   let [modal, setModal] = useState(false);
   let [data, setData] = useState();
@@ -37,7 +39,13 @@ function Dashboard({
       )}
 
       {modal ? (
-        <Modal setModal={setModal} setLoading={setLoading} loading={loading} />
+        <Modal
+          setModal={setModal}
+          setLoading={setLoading}
+          loading={loading}
+          trigger={trigger}
+          setTrigger={setTrigger}
+        />
       ) : (
         ""
       )}

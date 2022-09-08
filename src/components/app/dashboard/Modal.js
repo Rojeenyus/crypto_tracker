@@ -4,7 +4,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import ReactLoading from "react-loading";
 
-function Modal({ setModal, loading, setLoading }) {
+function Modal({ setModal, loading, setLoading, trigger, setTrigger }) {
   let data = {};
   const url = "https://crypto-tracker-ada97.herokuapp.com/wallets";
   let [input, setInput] = useState("");
@@ -26,6 +26,7 @@ function Modal({ setModal, loading, setLoading }) {
       setModal(false);
       setLoading(false);
       setError2(false);
+      setTrigger(!trigger);
     } catch (error) {
       setError(error.response.data.wallet_type);
       setError2(true);
