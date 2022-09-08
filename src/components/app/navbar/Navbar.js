@@ -28,11 +28,13 @@ function Navbar({ setHeaders, headers }) {
             <a
               className="name-dropdown"
               onClick={() => {
-                handleLogout();
+                if (string !== "Login") {
+                  handleLogout();
+                }
               }}
             >
               <span className="account-name">{string}</span>
-              <b className="caret"></b>
+              {string !== "Login" ? <b className="caret"></b> : ""}
             </a>
             {logout === true ? (
               <ul className="dropdown-menu" id="dropdown-menu">
