@@ -1,6 +1,4 @@
 .history {
-  border-radius: 5px;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 7%);
   overflow: hidden;
   width: 80%;
   margin: auto;
@@ -14,6 +12,8 @@
   background: #fff;
   align-items: center;
   cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 7%);
 }
 .c-activity-list__date {
   display: flex;
@@ -53,4 +53,7 @@
 }
 .positive {
   color: #2f9300;
+}
+.is-outgoing {
+  text-align: right;
 }

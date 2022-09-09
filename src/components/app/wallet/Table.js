@@ -175,13 +175,13 @@ function Table({
         <thead>
           <tr>
             <th scope="col">Coin</th>
-            <th scope="col">Average buy price</th>
+            <th scope="col" className="hide">
+              Average buy price
+            </th>
             <th scope="col" className="hide">
               Current Price
             </th>
-            <th scope="col" className="hide">
-              Current Holdings
-            </th>
+            <th scope="col">Current Holdings</th>
             <th scope="col">Total Value</th>
             <th scope="col">PNL</th>
             <th scope="col">Action</th>
@@ -193,7 +193,7 @@ function Table({
                 return (
                   <tr key={x.symbol}>
                     <th scope="row">{x.symbol.toUpperCase()}</th>
-                    <td>
+                    <td className="hide">
                       $
                       {x.buy_price.toLocaleString(undefined, {
                         maximumFractionDigits: 2,
@@ -205,7 +205,7 @@ function Table({
                         maximumFractionDigits: 2,
                       })}
                     </td>
-                    <td className="hide">
+                    <td>
                       {x.quantity.toLocaleString(undefined, {
                         maximumFractionDigits: 2,
                       })}
